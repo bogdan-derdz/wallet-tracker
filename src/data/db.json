@@ -1,0 +1,25 @@
+{
+  "records": [
+    {
+      "id": "b70aa025",
+      "type": "income",
+      "category": "28822bd5",
+      "amount": 500,
+      "date": "2023-06-18"
+    },
+    {
+      "id": "056fed8f",
+      "type": "expense",
+      "category": "da018bba",
+      "amount": 200,
+      "date": "2023-06-18"
+    },
+    {
+      "id": "8b5ce191",
+      "type": "expense",
+      "category": "da018bba",
+      "amount": 50,
+      "date": "2023-06-18"
+    }
+  ]
+}

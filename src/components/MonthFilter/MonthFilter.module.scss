@@ -1,0 +1,7 @@
+.wrapper {
+	@apply flex justify-center gap-2;
+}
+
+.input {
+	@apply border-[1px] border-solid border-gray-300 rounded-md text-center font-medium pl-4;
+}

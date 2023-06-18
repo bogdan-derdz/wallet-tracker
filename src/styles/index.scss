@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	@apply font-montserrat bg-lightGrey text-slate-900 text-base font-normal;
+}
+.container {
+	@apply max-w-7xl px-5 mx-auto;
+}
+
+.button {
+	@apply bg-sky-400;
+}

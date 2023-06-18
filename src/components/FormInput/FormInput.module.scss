@@ -1,0 +1,26 @@
+.container {
+	@apply flex flex-col gap-2 relative z-0;
+}
+
+.input {
+	@apply border-solid border-[1px] border-gray-300  rounded-md px-2 py-1 text-base w-[160px];
+	&:focus {
+		@apply outline-none border-green-400;
+	}
+}
+
+.label {
+	@apply font-medium text-sm;
+}
+
+.amount-input {
+	@apply pl-2 pr-12 text-right;
+}
+
+.currency {
+	@apply absolute right-[4px] bottom-[5px] font-medium select-none;
+	&::before {
+		content: "";
+		@apply h-[34px] w-[1px] bg-gray-300 absolute left-[-4px] top-[50%] translate-y-[-50%];
+	}
+}

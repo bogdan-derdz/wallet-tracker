@@ -1,0 +1,36 @@
+.container {
+	@apply p-5 w-[500px] flex flex-col items-center gap-10 justify-center;
+
+	& button {
+		@apply self-center;
+	}
+}
+
+.wrapper {
+	@apply flex items-center justify-center w-full gap-16;
+}
+
+.type-container {
+	@apply self-center flex items-center justify-center gap-[1px] relative rounded-lg border-[1px] border-gray-300;
+
+	&::before {
+		content: "";
+		@apply absolute h-full w-1/2 left-0 z-0 transition-all duration-500;
+	}
+
+	&.expense::before {
+		@apply bg-red-500 rounded-l-lg translate-x-0;
+	}
+
+	&.income::before {
+		@apply bg-green-500 rounded-r-lg translate-x-full;
+	}
+}
+
+.type-button {
+	@apply w-32 text-center py-1 text-base font-medium z-10 transition-all duration-500;
+
+	&.active {
+		@apply text-white;
+	}
+}

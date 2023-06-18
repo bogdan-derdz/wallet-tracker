@@ -1,0 +1,19 @@
+.wrapper {
+	@apply w-[400px] h-[380px] bg-white rounded-xl overflow-hidden flex flex-col select-none;
+}
+
+.header {
+	@apply flex items-center justify-between w-full p-3 relative;
+	&::after {
+		content: "";
+		@apply absolute w-full h-[1px] bg-gray-300 left-0 bottom-0;
+	}
+}
+
+.title {
+	@apply text-base font-semibold;
+}
+
+.content {
+	@apply p-3 overflow-hidden gap-3 flex flex-col items-start w-full;
+}
