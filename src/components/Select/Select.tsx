@@ -16,33 +16,32 @@ type SelectProps<T> = {
 	handleChange: (name: string, value: string) => void;
 };
 
-const Select = <T extends option>({
-	options,
-	handleChange,
-	name,
-	label,
-	selected,
-}: SelectProps<T>) => {
-	const { active, ref, setActive } = useOutsideClick(false);
+const Select = <T extends option>(props: SelectProps<T>) => {
+	const { options, handleChange, name, label, selected } = props;
+
+	const { active, ref, handleActive } = useOutsideClick(false);
 
 	const handleSelect = (option: option) => {
 		handleChange(name, option.id);
 
-		setActive(!active);
+		handleActive();
 	};
 
 	return (
 		<>
-			<div className={styles.container}>
+			<div
+				className={styles.container}
+				ref={ref}>
 				<label className={styles.label}>{label}</label>
 
 				<div
 					className={styles.wrapper}
-					onClick={() => setActive(!active)}>
+					onClick={() => handleActive()}>
 					<span
-						className={`${styles.icon} ${
-							selected ? selected.color : "bg-red-500"
-						}`}>
+						className={styles.icon}
+						style={{
+							backgroundColor: selected ? selected.color : "#ef4444",
+						}}>
 						{selected && selected.icon}
 					</span>
 
@@ -52,15 +51,18 @@ const Select = <T extends option>({
 				</div>
 
 				{active && (
-					<ul
-						className={styles.list}
-						ref={ref}>
+					<ul className={styles.list}>
 						{options.map((option) => (
 							<li
 								key={option.id}
 								className={styles.option}
-								onClick={() => handleSelect(option)}>
-								<span className={`${styles.icon} ${option.color}`}>
+								onClick={(e) => {
+									e.stopPropagation();
+									handleSelect(option);
+								}}>
+								<span
+									className={styles.icon}
+									style={{ backgroundColor: option.color }}>
 									{option.icon}
 								</span>
 

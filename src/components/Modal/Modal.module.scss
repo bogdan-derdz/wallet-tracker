@@ -2,16 +2,16 @@
 	@apply w-screen h-screen left-0 top-0 fixed flex justify-center items-center bg-black/[.6];
 }
 
-.content {
-	@apply bg-white rounded-xl flex flex-col justify-start items-center w-fit h-fit;
-}
-
 .header {
-	@apply flex items-center justify-between w-full pl-5 pr-3 py-3 bg-gray-100 relative select-none rounded-t-xl;
+	@apply flex items-center justify-between w-full p-3 bg-gray-100 relative select-none rounded-t-xl;
 	&::after {
 		content: "";
 		@apply absolute w-full h-[1px] bg-gray-300 left-0 bottom-0;
 	}
+}
+
+.content {
+	@apply bg-white rounded-xl flex flex-col justify-start items-center w-fit h-fit;
 }
 
 .title {

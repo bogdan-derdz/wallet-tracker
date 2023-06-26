@@ -1,5 +1,5 @@
 .container {
-	@apply p-5 w-[500px] flex flex-col items-center gap-10 justify-center;
+	@apply py-5 px-10 w-[500px] flex flex-col items-center gap-10 justify-center;
 
 	& button {
 		@apply self-center;
@@ -7,7 +7,7 @@
 }
 
 .wrapper {
-	@apply flex items-center justify-center w-full gap-16;
+	@apply flex items-center justify-center w-full gap-5;
 }
 
 .type-container {
@@ -27,7 +27,7 @@
 	}
 }
 
-.type-button {
+.button {
 	@apply w-32 text-center py-1 text-base font-medium z-10 transition-all duration-500;
 
 	&.active {

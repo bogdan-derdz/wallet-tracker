@@ -1,25 +1,144 @@
 {
   "records": [
     {
-      "id": "b70aa025",
-      "type": "income",
-      "category": "28822bd5",
-      "amount": 500,
-      "date": "2023-06-18"
-    },
-    {
-      "id": "056fed8f",
-      "type": "expense",
-      "category": "da018bba",
-      "amount": 200,
-      "date": "2023-06-18"
-    },
-    {
-      "id": "8b5ce191",
+      "id": "93d215ba",
       "type": "expense",
       "category": "da018bba",
       "amount": 50,
-      "date": "2023-06-18"
+      "date": "2023-06-23"
+    },
+    {
+      "id": "d4c39c68",
+      "type": "income",
+      "category": "867472f9",
+      "amount": 5,
+      "date": "2023-06-23"
+    },
+    {
+      "id": "86a344c0",
+      "type": "expense",
+      "category": "28822bd5",
+      "amount": 100,
+      "date": "2023-06-23"
+    },
+    {
+      "id": "1362435e",
+      "type": "expense",
+      "category": "da018bba",
+      "amount": 50,
+      "date": "2023-06-24"
+    },
+    {
+      "id": "84ecf3fe",
+      "type": "expense",
+      "category": "da018bba",
+      "amount": 50,
+      "date": "2023-06-24"
+    },
+    {
+      "id": "a4b29fd0",
+      "type": "expense",
+      "category": "867472f9",
+      "amount": 50,
+      "date": "2023-06-24"
+    },
+    {
+      "id": "f8a13377",
+      "type": "expense",
+      "category": "da018bba",
+      "amount": 50,
+      "date": "2023-05-24"
+    },
+    {
+      "id": "8110b653",
+      "type": "income",
+      "category": "da018bba",
+      "amount": 550,
+      "date": "2023-02-24"
+    },
+    {
+      "id": "75c426a7",
+      "type": "expense",
+      "category": "da018bba",
+      "amount": 120,
+      "date": "2023-04-25"
+    },
+    {
+      "id": "e61ab076",
+      "type": "expense",
+      "category": "28822bd5",
+      "amount": 520,
+      "date": "2023-03-25"
+    },
+    {
+      "id": "af54ff5b",
+      "type": "expense",
+      "category": "da018bba",
+      "amount": 210,
+      "date": "2023-01-25"
+    },
+    {
+      "id": "9f857a23",
+      "type": "expense",
+      "category": "da018bba",
+      "amount": 120,
+      "date": "2022-12-25"
+    },
+    {
+      "id": "d1918aa2",
+      "type": "expense",
+      "category": "9f6d590e",
+      "amount": 50,
+      "date": "2023-06-26"
+    },
+    {
+      "id": "e76e3d69",
+      "type": "expense",
+      "category": "28822bd5",
+      "amount": 50,
+      "date": "2023-06-26"
+    },
+    {
+      "id": "266b0c4c",
+      "type": "expense",
+      "category": "9f6d590e",
+      "amount": 55,
+      "date": "2023-06-26"
+    },
+    {
+      "id": "49711127",
+      "type": "expense",
+      "category": "2935b075",
+      "amount": 50,
+      "date": "2023-06-26"
+    },
+    {
+      "id": "ea91c801",
+      "type": "expense",
+      "category": "6e2c3d6f",
+      "amount": 50,
+      "date": "2023-06-26"
+    },
+    {
+      "id": "b6318fb3",
+      "type": "expense",
+      "category": "77991b48",
+      "amount": 520,
+      "date": "2023-06-26"
+    },
+    {
+      "id": "7f416104",
+      "type": "expense",
+      "category": "9f6d590e",
+      "amount": 40,
+      "date": "2023-06-26"
+    },
+    {
+      "id": "0820fbdd",
+      "type": "income",
+      "category": "f40f4cf9",
+      "amount": 50,
+      "date": "2023-06-26"
     }
   ]
 }

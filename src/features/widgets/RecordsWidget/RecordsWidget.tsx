@@ -1,4 +1,5 @@
 import { FC } from "react";
+
 import RecordList from "../../../components/RecordList/RecordList";
 import WidgetLayout from "../../../layouts/WidgetLayout/WidgetLayout";
 

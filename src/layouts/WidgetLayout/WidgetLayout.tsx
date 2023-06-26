@@ -1,6 +1,7 @@
 import { FC } from "react";
-import styles from "./WidgetLayout.module.scss";
 import { MdDragHandle } from "react-icons/md";
+
+import styles from "./WidgetLayout.module.scss";
 
 interface WidgetLayoutProps {
 	title: string;

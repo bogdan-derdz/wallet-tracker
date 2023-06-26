@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { useCreateRecordMutation, useUpdateRecordMutation } from "../../services/api";
 import { v4 as uuid } from "uuid";
 
@@ -21,7 +21,7 @@ const RecordForm: FC<RecordFormProps> = ({ handleClose, record, action = "create
 	const [createRecord, {}] = useCreateRecordMutation();
 	const [updateRecord, {}] = useUpdateRecordMutation();
 
-	// Form state
+	//* Form state
 	const date = new Date().toISOString().split("T")[0];
 	const uniqId = uuid().slice(0, 8);
 
@@ -35,20 +35,30 @@ const RecordForm: FC<RecordFormProps> = ({ handleClose, record, action = "create
 
 	const category = categories.find((category) => category.id === formData.category, {});
 
+	// Returns array with categories by type "expense" / "income" to make searching easier
+	const TypedCategories = useMemo(() => {
+		switch (formData.type) {
+			case "expense":
+				return categories.slice(0, 11);
+			case "income":
+				return categories.slice(-9);
+		}
+	}, [formData.type]);
+
 	useEffect(() => {
 		if (record) {
 			setFormData(record);
 		}
 	}, []);
 
-	// Form change handler
+	//* Form change handler
 	const handleChange = (name: string, value: string | number) => {
 		setFormData((prevState) => {
 			return { ...prevState, [name]: value };
 		});
 	};
 
-	// Form submit action handler
+	//* Form submit action handler
 	const handleSubmit = async () => {
 		switch (action) {
 			case "create":
@@ -67,7 +77,7 @@ const RecordForm: FC<RecordFormProps> = ({ handleClose, record, action = "create
 			<div className={`${styles["type-container"]} ${styles[formData.type]}`}>
 				<button
 					onClick={() => handleChange("type", "expense")}
-					className={`${styles["type-button"]} border-r-0 rounded-r-none ${
+					className={`${styles.button} border-r-0 rounded-r-none ${
 						formData.type === "expense" && styles.active
 					}`}
 					type="button">
@@ -76,7 +86,7 @@ const RecordForm: FC<RecordFormProps> = ({ handleClose, record, action = "create
 
 				<button
 					onClick={() => handleChange("type", "income")}
-					className={`${styles["type-button"]} border-l-0 rounded-l-none ${
+					className={`${styles.button} border-l-0 rounded-l-none ${
 						formData.type === "income" && styles.active
 					}`}
 					type="button">
@@ -89,7 +99,7 @@ const RecordForm: FC<RecordFormProps> = ({ handleClose, record, action = "create
 				selected={category}
 				name="category"
 				handleChange={handleChange}
-				options={categories}
+				options={TypedCategories}
 			/>
 
 			<div className={styles.wrapper}>
@@ -99,6 +109,7 @@ const RecordForm: FC<RecordFormProps> = ({ handleClose, record, action = "create
 					value={formData.amount}
 					onChange={handleChange}
 				/>
+
 				<FormInput
 					label="Date"
 					type="date"

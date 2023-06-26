@@ -10,11 +10,30 @@ interface FormInputProps {
 	onChange: (name: string, value: string | number) => void;
 }
 
+//Formatting input data to correct format
+const formatInputValue = (name: string, value: string) => {
+	const date = new Date().toISOString().split("T")[0];
+
+	switch (name) {
+		case "amount":
+			return Number(value.replace(/\D/, ""));
+		case "date":
+			if (!value) {
+				return date;
+			}
+			return value > date ? date : value;
+
+		default:
+			return value;
+	}
+};
+
 const FormInput: FC<FormInputProps> = ({ label, type, value, onChange, max }) => {
 	// Input handling
 	const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.currentTarget;
-		const formattedValue = type === "amount" ? Number(value) : value;
+
+		const formattedValue = formatInputValue(name, value);
 
 		onChange(name, formattedValue);
 	};
@@ -29,12 +48,6 @@ const FormInput: FC<FormInputProps> = ({ label, type, value, onChange, max }) =>
 
 			{type === "amount" && (
 				<>
-					<label
-						htmlFor={type}
-						className={styles.currency}>
-						USD
-					</label>
-
 					<input
 						className={`${styles.input} ${styles["amount-input"]}`}
 						type="text"
@@ -44,6 +57,12 @@ const FormInput: FC<FormInputProps> = ({ label, type, value, onChange, max }) =>
 						value={value}
 						onChange={handleInputChange}
 					/>
+
+					<label
+						htmlFor={type}
+						className={styles.currency}>
+						USD
+					</label>
 				</>
 			)}
 
