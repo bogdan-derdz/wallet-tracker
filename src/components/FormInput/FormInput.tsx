@@ -16,7 +16,8 @@ const formatInputValue = (name: string, value: string) => {
 
 	switch (name) {
 		case "amount":
-			return Number(value.replace(/\D/, ""));
+			const cleanedValue = value.replace(/[^0-9.]/g, "");
+			return value ? cleanedValue : 0;
 		case "date":
 			if (!value) {
 				return date;

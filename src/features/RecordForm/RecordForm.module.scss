@@ -1,5 +1,5 @@
 .container {
-	@apply py-5 px-10 w-[500px] flex flex-col items-center gap-10 justify-center;
+	@apply py-5 px-10 w-[500px] flex flex-col items-center gap-10 justify-center relative;
 
 	& button {
 		@apply self-center;

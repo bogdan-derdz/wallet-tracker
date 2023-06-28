@@ -3,6 +3,7 @@ import BalanceWidget from "../../features/widgets/BalanceWidget/BalanceWidget";
 import RecordsWidget from "../../features/widgets/RecordsWidget/RecordsWidget";
 import ExpensesWidget from "../../features/widgets/ExpensesWidget/ExpensesWidget";
 import CashFlowWidget from "../../features/widgets/CashFlowWidget/CashFlowWidget";
+import IncomeWidgets from "../../features/widgets/IncomeWidgets/IncomeWidgets";
 
 const DashboardPage: FC = () => {
 	return (
@@ -12,6 +13,7 @@ const DashboardPage: FC = () => {
 				<CashFlowWidget />
 				<ExpensesWidget />
 				<RecordsWidget />
+				<IncomeWidgets />
 			</div>
 		</section>
 	);

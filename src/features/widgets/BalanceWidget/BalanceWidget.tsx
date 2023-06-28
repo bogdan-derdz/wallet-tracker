@@ -4,11 +4,14 @@ import useStatistics from "../../../hooks/useStatistics";
 
 import WidgetLayout from "../../../layouts/WidgetLayout/WidgetLayout";
 import WidgetChart from "../../../components/WidgetChart/WidgetChart";
+import ErrorMessage from "../../../layouts/ErrorMessage/ErrorMessage";
+import Spinner from "../../../layouts/Spinner/Spinner";
 
 import styles from "./BalanceWidget.module.scss";
 
 const BalanceWidget: FC = () => {
-	const { getTotalBalance, getBalanceTrend } = useStatistics();
+	const { getTotalBalance, getBalanceTrend, isError, isLoading, isSuccess } =
+		useStatistics();
 	const totalBalance = getTotalBalance();
 	const { amounts, labels } = getBalanceTrend();
 
@@ -30,23 +33,30 @@ const BalanceWidget: FC = () => {
 
 	return (
 		<WidgetLayout title="Balance">
-			<div className={styles.container}>
-				<p className={styles.title}>Total balance</p>
-				<p
-					className={`${styles.amount}  ${
-						totalBalance < 0 ? " bg-red-500 " : " bg-green-400"
-					}`}>
-					{totalBalance}
-					<span className={styles.currency}>USD</span>
-				</p>
-			</div>
-			<WidgetChart
-				title="Last 6 month trend"
-				data={data}
-				type="line"
-				width="100%"
-				height=""
-			/>
+			{isLoading && <Spinner />}
+			{isError && <ErrorMessage />}
+
+			{isSuccess && (
+				<>
+					<div className={styles.container}>
+						<p className={styles.title}>This month</p>
+						<p
+							className={`${styles.amount}  ${
+								totalBalance < 0 ? " bg-red-500 " : " bg-green-400"
+							}`}>
+							{totalBalance}
+							<span className={styles.currency}>USD</span>
+						</p>
+					</div>
+					<WidgetChart
+						title="Last 6 month trend"
+						data={data}
+						type="line"
+						width="100%"
+						height=""
+					/>
+				</>
+			)}
 		</WidgetLayout>
 	);
 };

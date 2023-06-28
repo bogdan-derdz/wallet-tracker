@@ -35,7 +35,8 @@ const RecordForm: FC<RecordFormProps> = ({ handleClose, record, action = "create
 
 	const category = categories.find((category) => category.id === formData.category, {});
 
-	// Returns array with categories by type "expense" / "income" to make searching easier
+	//! Returns array with categories by type "expense" / "income" to make searching easier
+	//! Rework needed
 	const TypedCategories = useMemo(() => {
 		switch (formData.type) {
 			case "expense":
@@ -53,23 +54,34 @@ const RecordForm: FC<RecordFormProps> = ({ handleClose, record, action = "create
 
 	//* Form change handler
 	const handleChange = (name: string, value: string | number) => {
+		setIsValid(true);
+
 		setFormData((prevState) => {
 			return { ...prevState, [name]: value };
 		});
 	};
 
 	//* Form submit action handler
-	const handleSubmit = async () => {
-		switch (action) {
-			case "create":
-				await createRecord(formData);
-				break;
-			case "edit":
-				await updateRecord(formData);
-				break;
-		}
+	const [isValid, setIsValid] = useState(true);
 
-		setTimeout(() => handleClose(), 200);
+	const handleSubmit = async () => {
+		if (!formData.amount || !formData.category) {
+			setIsValid(false);
+		} else {
+			switch (action) {
+				case "create":
+					await createRecord({
+						...formData,
+						amount: Number(formData.amount),
+					});
+					console.log("test");
+					break;
+				case "edit":
+					await updateRecord(formData);
+					break;
+			}
+			setTimeout(() => handleClose(), 200);
+		}
 	};
 
 	return (
@@ -123,6 +135,11 @@ const RecordForm: FC<RecordFormProps> = ({ handleClose, record, action = "create
 				<AiFillCheckCircle size="20px" />
 				{action} record
 			</Button>
+			{!isValid && (
+				<p className="font-medium text-sm text-red-600 absolute bottom-[65px] w-full text-center animate-pulse">
+					please enter all form fields to submit
+				</p>
+			)}
 		</form>
 	);
 };

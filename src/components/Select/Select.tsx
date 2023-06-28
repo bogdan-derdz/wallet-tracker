@@ -1,5 +1,6 @@
-import styles from "./Select.module.scss";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
+
+import styles from "./Select.module.scss";
 
 interface option {
 	id: string;

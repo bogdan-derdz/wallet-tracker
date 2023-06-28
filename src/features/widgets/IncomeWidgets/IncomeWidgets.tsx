@@ -6,13 +6,13 @@ import WidgetChart from "../../../components/WidgetChart/WidgetChart";
 import ErrorMessage from "../../../layouts/ErrorMessage/ErrorMessage";
 import Spinner from "../../../layouts/Spinner/Spinner";
 
-import styles from "./ExpensesWidget.module.scss";
+import styles from "./IncomeWidgets.module.scss";
 
-const ExpensesWidget: FC = () => {
-	const { getExpensesByCategory, getCashFlowStat, isError, isLoading, isSuccess } =
+const IncomeWidgets: FC = () => {
+	const { getIncomesByCategory, getCashFlowStat, isError, isLoading, isSuccess } =
 		useStatistics();
-	const { labels, total, colors } = getExpensesByCategory();
-	const { expense } = getCashFlowStat();
+	const { labels, total, colors } = getIncomesByCategory();
+	const { income } = getCashFlowStat();
 
 	const data: ChartData<"doughnut"> = {
 		labels,
@@ -26,22 +26,22 @@ const ExpensesWidget: FC = () => {
 	};
 
 	return (
-		<WidgetLayout title="Expenses Structure">
-			{isLoading && <Spinner />}
+		<WidgetLayout title="Incomes Structure">
 			{isError && <ErrorMessage />}
+			{isLoading && <Spinner />}
 
 			{isSuccess && (
 				<>
 					<div className={styles.container}>
 						<p className={styles.title}>This month</p>
 						<p className={styles.amount}>
-							-{expense}
+							{income}
 							<span className={styles.currency}>USD</span>
 						</p>
 					</div>
 					<div className="w-full">
 						<WidgetChart
-							title="Expenses by categories"
+							title="Incomes by categories"
 							data={data}
 							type="doughnut"
 							width="180px"
@@ -54,4 +54,4 @@ const ExpensesWidget: FC = () => {
 	);
 };
 
-export default ExpensesWidget;
+export default IncomeWidgets;

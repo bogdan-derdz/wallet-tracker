@@ -4,7 +4,7 @@ import { filterRecordsByMonth } from "../utils/filterBy";
 
 import { categories } from "../data/categories";
 
-interface expenseByCategory {
+interface itemsByCategory {
 	category: string;
 	total: number;
 	color: string;
@@ -16,7 +16,7 @@ interface balanceTrend {
 }
 
 const useStatistics = () => {
-	const { data: records = [] } = useGetAllRecordsQuery();
+	const { data: records = [], isError, isLoading, isSuccess } = useGetAllRecordsQuery();
 	const { dateFilter } = useAppSelector((state) => state.filterSlice);
 	const filteredRecords = filterRecordsByMonth(records, dateFilter);
 
@@ -32,17 +32,17 @@ const useStatistics = () => {
 		}, 0);
 	};
 
-	//* Getting total amount of expenses by category
-	const getExpensesByCategory = () => {
-		const expensesByCategory: expenseByCategory[] = [];
+	//* Getting total amount of expenses / incomes by category
+	const sortByCategory = (type: "expense" | "income") => {
+		const sortedArray: itemsByCategory[] = [];
 
 		filteredRecords.forEach((current) => {
-			if (current.type === "expense") {
+			if (current.type === type) {
 				const category = categories.find(
 					(category) => category.id === current.category
 				)!;
 
-				const currentCategory = expensesByCategory.find(
+				const currentCategory = sortedArray.find(
 					(item) => item.category === category.title
 				);
 
@@ -50,7 +50,7 @@ const useStatistics = () => {
 					return (currentCategory.total += current.amount);
 				}
 
-				return expensesByCategory.push({
+				return sortedArray.push({
 					category: category.title,
 					total: current.amount,
 					color: category.color,
@@ -58,9 +58,25 @@ const useStatistics = () => {
 			}
 		});
 
+		return sortedArray;
+	};
+
+	const getExpensesByCategory = () => {
+		const expensesByCategory: itemsByCategory[] = sortByCategory("expense");
+
 		const labels = expensesByCategory.map((item) => item.category);
 		const total = expensesByCategory.map((item) => item.total);
 		const colors = expensesByCategory.map((item) => item.color);
+
+		return { labels, total, colors };
+	};
+
+	const getIncomesByCategory = () => {
+		const incomesByCategory: itemsByCategory[] = sortByCategory("income");
+
+		const labels = incomesByCategory.map((item) => item.category);
+		const total = incomesByCategory.map((item) => item.total);
+		const colors = incomesByCategory.map((item) => item.color);
 
 		return { labels, total, colors };
 	};
@@ -125,7 +141,16 @@ const useStatistics = () => {
 	};
 
 	//* Export
-	return { getTotalBalance, getExpensesByCategory, getBalanceTrend, getCashFlowStat };
+	return {
+		getTotalBalance,
+		getExpensesByCategory,
+		getBalanceTrend,
+		getCashFlowStat,
+		getIncomesByCategory,
+		isError,
+		isLoading,
+		isSuccess,
+	};
 };
 
 export default useStatistics;
