@@ -1,7 +1,6 @@
 import { useGetAllRecordsQuery } from "../services/api";
 import { useAppSelector } from "./redux";
-import { filterRecordsByMonth } from "../utils/filterBy";
-
+import { filterRecordsByMonth } from "../utils/filterByMonth";
 import { categories } from "../data/categories";
 
 interface itemsByCategory {
@@ -17,7 +16,7 @@ interface balanceTrend {
 
 const useStatistics = () => {
 	const { data: records = [], isError, isLoading, isSuccess } = useGetAllRecordsQuery();
-	const { dateFilter } = useAppSelector((state) => state.filterSlice);
+	const { dateFilter } = useAppSelector((state) => state.preferencesSlice);
 	const filteredRecords = filterRecordsByMonth(records, dateFilter);
 
 	//* Total balance for all time

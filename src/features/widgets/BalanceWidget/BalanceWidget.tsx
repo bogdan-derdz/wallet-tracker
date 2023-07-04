@@ -7,14 +7,15 @@ import WidgetChart from "../../../components/WidgetChart/WidgetChart";
 import ErrorMessage from "../../../layouts/ErrorMessage/ErrorMessage";
 import Spinner from "../../../layouts/Spinner/Spinner";
 
-import styles from "./BalanceWidget.module.scss";
-
 const BalanceWidget: FC = () => {
+	//* Statistics data
 	const { getTotalBalance, getBalanceTrend, isError, isLoading, isSuccess } =
 		useStatistics();
+
 	const totalBalance = getTotalBalance();
 	const { amounts, labels } = getBalanceTrend();
 
+	//* Chart data object for component
 	const data: ChartData<"line"> = {
 		labels,
 		datasets: [
@@ -38,16 +39,17 @@ const BalanceWidget: FC = () => {
 
 			{isSuccess && (
 				<>
-					<div className={styles.container}>
-						<p className={styles.title}>This month</p>
+					<div className="widget__container">
+						<p className="title">This month</p>
 						<p
-							className={`${styles.amount}  ${
+							className={`amount ${
 								totalBalance < 0 ? " bg-red-500 " : " bg-green-400"
 							}`}>
 							{totalBalance}
-							<span className={styles.currency}>USD</span>
+							<span className="currency">USD</span>
 						</p>
 					</div>
+
 					<WidgetChart
 						title="Last 6 month trend"
 						data={data}

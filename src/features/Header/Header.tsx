@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from "react";
+import { FC } from "react";
 import Button from "../../components/Button/Button";
 import Modal from "../../components/Modal/Modal";
 import { useModal } from "../../hooks/useModal";
@@ -21,13 +21,16 @@ const Header: FC = () => {
 						/>
 						Dashboard
 					</div>
+
 					<MonthFilter />
+
 					<Button onClick={toggleActive}>
 						<AiFillPlusCircle size="20px" />
 						New record
 					</Button>
 				</div>
 			</header>
+
 			{active && (
 				<Modal
 					title="Create Record"

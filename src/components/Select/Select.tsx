@@ -1,14 +1,16 @@
 import { useOutsideClick } from "../../hooks/useOutsideClick";
-
 import styles from "./Select.module.scss";
 
+//* Reusable interface for option element
 interface option {
 	id: string;
 	color: string;
 	title: string;
 	icon: React.ReactElement;
+	[key: string]: any;
 }
 
+//* type for reusable
 type SelectProps<T> = {
 	label: string;
 	name: string;
@@ -20,8 +22,10 @@ type SelectProps<T> = {
 const Select = <T extends option>(props: SelectProps<T>) => {
 	const { options, handleChange, name, label, selected } = props;
 
+	//* Connected hook for closing list of options by clicking outside of list
 	const { active, ref, handleActive } = useOutsideClick(false);
 
+	//* Handler for click on options
 	const handleSelect = (option: option) => {
 		handleChange(name, option.id);
 

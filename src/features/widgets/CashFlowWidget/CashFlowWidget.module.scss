@@ -1,25 +1,4 @@
-.container {
-	@apply flex flex-col gap-1 w-full relative pb-2;
-
-	&::after {
-		content: "";
-		@apply absolute w-full h-[1px] bg-gray-300 bottom-0;
-	}
-}
-
-.title {
-	@apply font-semibold text-sm text-slate-900;
-}
-
-.amount {
-	@apply ml-1 font-semibold text-base w-fit rounded-2xl px-2 text-white transition-all duration-300 ease-in-out;
-}
-
-.currency {
-	@apply text-xs ml-1;
-}
-
-.value {
+.total {
 	@apply ml-1 font-semibold text-base;
 }
 

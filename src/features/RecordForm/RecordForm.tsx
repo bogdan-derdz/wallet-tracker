@@ -3,7 +3,7 @@ import { useCreateRecordMutation, useUpdateRecordMutation } from "../../services
 import { v4 as uuid } from "uuid";
 
 import Button from "../../components/Button/Button";
-import FormInput from "../../components/FormInput/FormInput";
+import Input from "../../components/Input/Input";
 import Select from "../../components/Select/Select";
 import { AiFillCheckCircle } from "react-icons/ai";
 
@@ -37,7 +37,11 @@ const RecordForm: FC<RecordFormProps> = ({ handleClose, record, action = "create
 
 	//! Returns array with categories by type "expense" / "income" to make searching easier
 	//! Rework needed
-	const TypedCategories = useMemo(() => {
+	const CategoriesByType = useMemo(() => {
+		setFormData((prevState) => {
+			return { ...prevState, category: "" };
+		});
+
 		switch (formData.type) {
 			case "expense":
 				return categories.slice(0, 11);
@@ -111,18 +115,20 @@ const RecordForm: FC<RecordFormProps> = ({ handleClose, record, action = "create
 				selected={category}
 				name="category"
 				handleChange={handleChange}
-				options={TypedCategories}
+				options={CategoriesByType}
 			/>
 
 			<div className={styles.wrapper}>
-				<FormInput
+				<Input
+					name="amount"
 					label="Amount"
-					type="amount"
+					type="text"
 					value={formData.amount}
 					onChange={handleChange}
 				/>
 
-				<FormInput
+				<Input
+					name="date"
 					label="Date"
 					type="date"
 					max={date}

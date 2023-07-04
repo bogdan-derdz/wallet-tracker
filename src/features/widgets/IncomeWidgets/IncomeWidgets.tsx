@@ -6,8 +6,6 @@ import WidgetChart from "../../../components/WidgetChart/WidgetChart";
 import ErrorMessage from "../../../layouts/ErrorMessage/ErrorMessage";
 import Spinner from "../../../layouts/Spinner/Spinner";
 
-import styles from "./IncomeWidgets.module.scss";
-
 const IncomeWidgets: FC = () => {
 	const { getIncomesByCategory, getCashFlowStat, isError, isLoading, isSuccess } =
 		useStatistics();
@@ -32,13 +30,15 @@ const IncomeWidgets: FC = () => {
 
 			{isSuccess && (
 				<>
-					<div className={styles.container}>
-						<p className={styles.title}>This month</p>
-						<p className={styles.amount}>
+					<div className="widget__container">
+						<p className="title">This month</p>
+
+						<p className="amount bg-green-400">
 							{income}
-							<span className={styles.currency}>USD</span>
+							<span className="currency">USD</span>
 						</p>
 					</div>
+
 					<div className="w-full">
 						<WidgetChart
 							title="Incomes by categories"

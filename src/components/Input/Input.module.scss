@@ -17,6 +17,10 @@
 	@apply pl-2 pr-12 text-right w-[200px];
 }
 
+.date-input {
+	@apply pl-2;
+}
+
 .currency {
 	@apply absolute right-[4px] bottom-[5px] font-medium select-none;
 	&::before {

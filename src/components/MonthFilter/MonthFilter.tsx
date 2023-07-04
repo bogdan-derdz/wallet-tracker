@@ -1,19 +1,18 @@
 import { FC, useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { setDateFilter } from "../../store/filter/filterSlice";
-
+import { setDateFilter } from "../../store/preferences/preferencesSlice";
 import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md";
-
 import styles from "./MonthFilter.module.scss";
 
 const MonthFilter: FC = () => {
 	const dispatch = useAppDispatch();
-	const { dateFilter } = useAppSelector((state) => state.filterSlice);
+	const { dateFilter } = useAppSelector((state) => state.preferencesSlice);
 
-	// Current Date
+	//* Current Date
 	const month = new Date().toLocaleDateString("default", {
 		month: "2-digit",
 	});
+
 	const year = new Date().toLocaleDateString("default", {
 		year: "numeric",
 	});
@@ -24,7 +23,7 @@ const MonthFilter: FC = () => {
 		dispatch(setDateFilter(currentDate));
 	}, []);
 
-	// Ref for input through which buttons change value
+	//* Ref for input through which buttons change value
 	const ref = useRef<HTMLInputElement>(null);
 
 	const handleChange = (action: "up" | "down") => {

@@ -1,11 +1,9 @@
 import { FC } from "react";
 import { useDeleteRecordMutation } from "../../services/api";
 import { useModal } from "../../hooks/useModal";
-
 import Modal from "../Modal/Modal";
-import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import RecordForm from "../../features/RecordForm/RecordForm";
-
+import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import { Record } from "../../types/record";
 import { categories } from "../../data/categories";
 import styles from "./RecordItem.module.scss";
@@ -16,8 +14,10 @@ interface RecordItemProps {
 
 const RecordItem: FC<RecordItemProps> = ({ record }) => {
 	const { active, toggleActive } = useModal();
+
 	const [deleteRecord, {}] = useDeleteRecordMutation();
 
+	//* const with record category data
 	const category = categories.find((category) => category.id === record.category)!;
 
 	//* Styles for amount dependent on record type
@@ -38,6 +38,7 @@ const RecordItem: FC<RecordItemProps> = ({ record }) => {
 			deleteRecord(record);
 		}
 	};
+
 	return (
 		<>
 			<li className={styles.wrapper}>
@@ -47,9 +48,7 @@ const RecordItem: FC<RecordItemProps> = ({ record }) => {
 					{category.icon}
 				</span>
 
-				<div className={styles.content}>
-					<p className={styles.category}>{category.title}</p>
-				</div>
+				<p className={styles.category}>{category.title}</p>
 
 				<div className={styles.tools}>
 					<button onClick={toggleActive}>
