@@ -1,4 +1,4 @@
-//Formatting input data to correct format
+//* Formatting input data to correct format
 export const formatInputValue = (name: string, value: string) => {
 	const date = new Date().toISOString().split("T")[0];
 

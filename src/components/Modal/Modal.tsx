@@ -1,6 +1,8 @@
 import { FC, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { motion } from "framer-motion";
+import { entryAnimation } from "../../utils/motion";
 import styles from "./Modal.module.scss";
 
 interface ModalProps {
@@ -19,12 +21,20 @@ const Modal: FC<ModalProps> = ({ title, handleClose, children }) => {
 		};
 	}, []);
 
-	//* Creating modal conponent in body
+	//* Creating modal conponent in body by portal
 	return createPortal(
-		<div
+		<motion.div
+			variants={entryAnimation(0, 0, 0.4, 0)}
+			initial="hidden"
+			animate="show"
+			exit="hidden"
 			className={styles.wrapper}
 			onClick={handleClose}>
-			<div
+			<motion.div
+				variants={entryAnimation(0, "10%", 0.3, 0.3)}
+				initial="hidden"
+				animate="show"
+				exit="hidden"
 				className={styles.content}
 				onClick={(e) => e.stopPropagation()}>
 				<div className={styles.header}>
@@ -38,8 +48,8 @@ const Modal: FC<ModalProps> = ({ title, handleClose, children }) => {
 				</div>
 
 				{children}
-			</div>
-		</div>,
+			</motion.div>
+		</motion.div>,
 		document.body
 	);
 };

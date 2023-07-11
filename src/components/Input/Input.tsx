@@ -1,5 +1,4 @@
 import { ChangeEvent, FC } from "react";
-import { formatInputValue } from "../../utils/formatInputValue";
 import styles from "./Input.module.scss";
 
 interface FormInputProps {
@@ -8,19 +7,19 @@ interface FormInputProps {
 	label: string;
 	value: string | number;
 	max?: string;
-	onChange: (name: string, value: string | number) => void;
+	onChange: (fieldName: string, fieldValue: string) => void;
+	error?: boolean;
 }
 
-const FormInput: FC<FormInputProps> = ({ name, label, type, value, onChange, max }) => {
-	// Input handling
-	const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const { name, value } = e.currentTarget;
-
-		const formattedValue = formatInputValue(name, value);
-
-		onChange(name, formattedValue);
-	};
-
+const FormInput: FC<FormInputProps> = ({
+	name,
+	label,
+	type,
+	value,
+	onChange,
+	max,
+	error,
+}) => {
 	return (
 		<div className={styles.container}>
 			<label
@@ -36,7 +35,9 @@ const FormInput: FC<FormInputProps> = ({ name, label, type, value, onChange, max
 				id={type}
 				placeholder={label}
 				value={value}
-				onChange={handleInputChange}
+				onChange={(e: ChangeEvent<HTMLInputElement>) =>
+					onChange(name, e.currentTarget.value)
+				}
 				max={max}
 			/>
 
@@ -47,6 +48,8 @@ const FormInput: FC<FormInputProps> = ({ name, label, type, value, onChange, max
 					USD
 				</label>
 			)}
+
+			{error && <p className="validation-error">amount cannot be empty</p>}
 		</div>
 	);
 };

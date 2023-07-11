@@ -1,26 +1,3 @@
 {
-  "records": [
-    {
-      "id": "37890070",
-      "type": "expense",
-      "category": "da018bba",
-      "amount": 50,
-      "date": "2023-07-02"
-    },
-    {
-      "id": "907b6ae3",
-      "type": "income",
-      "category": "c412deb6",
-      "amount": 500,
-      "date": "2023-07-03"
-    },
-    {
-      "id": "c8eef8d0",
-      "type": "income",
-      "category": "f40f4cf9",
-      "amount": 550,
-      "date": "0023-07-13",
-      "text": "03"
-    }
-  ]
+  "records": []
 }

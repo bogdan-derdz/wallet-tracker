@@ -1,11 +1,12 @@
 import { FC } from "react";
+import { useModal } from "../../hooks/useModal";
 import Button from "../../components/Button/Button";
 import Modal from "../../components/Modal/Modal";
-import { useModal } from "../../hooks/useModal";
-import styles from "./Header.module.scss";
 import { AiFillDashboard, AiFillPlusCircle } from "react-icons/ai";
 import RecordForm from "../../features/RecordForm/RecordForm";
 import MonthFilter from "../../components/MonthFilter/MonthFilter";
+import { AnimatePresence } from "framer-motion";
+import styles from "./Header.module.scss";
 
 const Header: FC = () => {
 	const { active, toggleActive } = useModal();
@@ -31,16 +32,18 @@ const Header: FC = () => {
 				</div>
 			</header>
 
-			{active && (
-				<Modal
-					title="Create Record"
-					handleClose={toggleActive}>
-					<RecordForm
-						action="create"
-						handleClose={toggleActive}
-					/>
-				</Modal>
-			)}
+			<AnimatePresence>
+				{active && (
+					<Modal
+						title="Create Record"
+						handleClose={toggleActive}>
+						<RecordForm
+							action="create"
+							handleClose={toggleActive}
+						/>
+					</Modal>
+				)}
+			</AnimatePresence>
 		</>
 	);
 };

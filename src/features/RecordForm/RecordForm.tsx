@@ -1,12 +1,12 @@
 import { FC, useEffect, useMemo, useState } from "react";
 import { useCreateRecordMutation, useUpdateRecordMutation } from "../../services/api";
 import { v4 as uuid } from "uuid";
-
+import { formatInputValue } from "../../utils/formatInputValue";
+import { useValidation } from "../../hooks/useValidation";
 import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
 import Select from "../../components/Select/Select";
 import { AiFillCheckCircle } from "react-icons/ai";
-
 import { categories } from "../../data/categories";
 import { Record } from "../../types/record";
 import styles from "./RecordForm.module.scss";
@@ -21,80 +21,79 @@ const RecordForm: FC<RecordFormProps> = ({ handleClose, record, action = "create
 	const [createRecord, {}] = useCreateRecordMutation();
 	const [updateRecord, {}] = useUpdateRecordMutation();
 
-	//* Form state
-	const date = new Date().toISOString().split("T")[0];
+	//* Form data
+	const currentDate = new Date().toISOString().split("T")[0];
 	const uniqId = uuid().slice(0, 8);
 
-	const [formData, setFormData] = useState<Record>({
+	const [recordData, setRecordData] = useState<Record>({
 		id: uniqId,
 		type: "expense",
 		category: "",
 		amount: 0,
-		date: date,
+		date: currentDate,
 	});
 
-	const category = categories.find((category) => category.id === formData.category, {});
+	//* Validation hook
+	const { formErrors, resetValidation, valitadeForm } = useValidation();
 
-	//! Returns array with categories by type "expense" / "income" to make searching easier
-	//! Rework needed
+	useEffect(() => {
+		record && setRecordData(record);
+	}, []);
+
+	const handleChange = (fieldName: string, fieldValue: string) => {
+		resetValidation(fieldName);
+
+		if (fieldName === "type") {
+			setRecordData((prevData) => ({ ...prevData, category: "" }));
+		}
+
+		const formattedValue = formatInputValue(fieldName, fieldValue);
+
+		setRecordData((prevData) => ({ ...prevData, [fieldName]: formattedValue }));
+	};
+
+	//* Current category data
+	const category = categories.find((item) => item.id === recordData.category, {});
+
+	//* Categories sorted by record type
 	const CategoriesByType = useMemo(() => {
-		setFormData((prevState) => {
-			return { ...prevState, category: "" };
-		});
-
-		switch (formData.type) {
+		switch (recordData.type) {
 			case "expense":
 				return categories.slice(0, 11);
 			case "income":
 				return categories.slice(-9);
 		}
-	}, [formData.type]);
-
-	useEffect(() => {
-		if (record) {
-			setFormData(record);
-		}
-	}, []);
-
-	//* Form change handler
-	const handleChange = (name: string, value: string | number) => {
-		setIsValid(true);
-
-		setFormData((prevState) => {
-			return { ...prevState, [name]: value };
-		});
-	};
-
-	//* Form submit action handler
-	const [isValid, setIsValid] = useState(true);
+	}, [recordData.type]);
 
 	const handleSubmit = async () => {
-		if (!formData.amount || !formData.category) {
-			setIsValid(false);
-		} else {
+		if (valitadeForm(recordData)) {
+			const amount = Number(recordData.amount);
 			switch (action) {
 				case "create":
 					await createRecord({
-						...formData,
-						amount: Number(formData.amount),
+						...recordData,
+						amount,
 					});
-					console.log("test");
 					break;
 				case "edit":
-					await updateRecord(formData);
+					await updateRecord({
+						...recordData,
+						amount,
+					});
 					break;
 			}
+
 			setTimeout(() => handleClose(), 200);
 		}
 	};
 
 	return (
 		<form className={styles.container}>
-			<div className={`${styles["type-container"]} ${styles[formData.type]}`}>
+			<div className={`${styles["type-container"]} ${styles[recordData.type]}`}>
 				<button
 					onClick={() => handleChange("type", "expense")}
 					className={`${styles.button} border-r-0 rounded-r-none ${
-						formData.type === "expense" && styles.active
+						recordData.type === "expense" && styles.active
 					}`}
 					type="button">
 					Expense
@@ -103,7 +102,7 @@ const RecordForm: FC<RecordFormProps> = ({ handleClose, record, action = "create
 				<button
 					onClick={() => handleChange("type", "income")}
 					className={`${styles.button} border-l-0 rounded-l-none ${
-						formData.type === "income" && styles.active
+						recordData.type === "income" && styles.active
 					}`}
 					type="button">
 					Income
@@ -114,8 +113,9 @@ const RecordForm: FC<RecordFormProps> = ({ handleClose, record, action = "create
 				label="Category"
 				selected={category}
 				name="category"
-				handleChange={handleChange}
+				onChange={handleChange}
 				options={CategoriesByType}
+				error={formErrors.category}
 			/>
 
 			<div className={styles.wrapper}>
@@ -123,16 +123,17 @@ const RecordForm: FC<RecordFormProps> = ({ handleClose, record, action = "create
 					name="amount"
 					label="Amount"
 					type="text"
-					value={formData.amount}
+					value={recordData.amount}
 					onChange={handleChange}
+					error={formErrors.amount}
 				/>
 
 				<Input
 					name="date"
 					label="Date"
 					type="date"
-					max={date}
-					value={formData.date}
+					max={currentDate}
+					value={recordData.date}
 					onChange={handleChange}
 				/>
 			</div>
@@ -141,11 +142,6 @@ const RecordForm: FC<RecordFormProps> = ({ handleClose, record, action = "create
 				<AiFillCheckCircle size="20px" />
 				{action} record
 			</Button>
-			{!isValid && (
-				<p className="font-medium text-sm text-red-600 absolute bottom-[65px] w-full text-center animate-pulse">
-					please enter all form fields to submit
-				</p>
-			)}
 		</form>
 	);
 };

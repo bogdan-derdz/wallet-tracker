@@ -1,10 +1,8 @@
 import { FC } from "react";
 import useStatistics from "../../../hooks/useStatistics";
-
 import ErrorMessage from "../../../layouts/ErrorMessage/ErrorMessage";
 import Spinner from "../../../layouts/Spinner/Spinner";
 import WidgetLayout from "../../../layouts/WidgetLayout/WidgetLayout";
-
 import styles from "./CashFlowWidget.module.scss";
 
 const CashFlowWidget: FC = () => {

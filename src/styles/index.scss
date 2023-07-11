@@ -14,4 +14,8 @@ body {
 	@apply bg-blue-500;
 }
 
+.validation-error {
+	@apply font-medium text-sm text-red-600 absolute bottom-[-25px] w-full text-center animate-pulse;
+}
+
 @import "./widgets.scss";

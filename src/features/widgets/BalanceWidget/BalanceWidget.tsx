@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { ChartData } from "chart.js";
 import useStatistics from "../../../hooks/useStatistics";
-
 import WidgetLayout from "../../../layouts/WidgetLayout/WidgetLayout";
 import WidgetChart from "../../../components/WidgetChart/WidgetChart";
 import ErrorMessage from "../../../layouts/ErrorMessage/ErrorMessage";
@@ -40,7 +39,7 @@ const BalanceWidget: FC = () => {
 			{isSuccess && (
 				<>
 					<div className="widget__container">
-						<p className="title">This month</p>
+						<p className="title">Total balance</p>
 						<p
 							className={`amount ${
 								totalBalance < 0 ? " bg-red-500 " : " bg-green-400"

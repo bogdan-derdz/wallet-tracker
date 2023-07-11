@@ -40,26 +40,38 @@ const MonthFilter: FC = () => {
 	};
 
 	return (
-		<div className={styles.wrapper}>
-			<button onClick={() => handleChange("down")}>
-				<MdOutlineArrowBackIos size="20px" />
-			</button>
+		<div className={styles.container}>
+			<div className={styles.wrapper}>
+				<button onClick={() => handleChange("down")}>
+					<MdOutlineArrowBackIos size="20px" />
+				</button>
 
-			<input
-				className={styles.input}
-				value={dateFilter}
-				step={1}
-				onChange={(e) => dispatch(setDateFilter(e.currentTarget.value))}
-				ref={ref}
-				type="month"
-				name="monthFilter"
-				id="monthFilter"
-				max={currentDate}
-				readOnly
-			/>
+				<input
+					className={styles.input}
+					value={dateFilter}
+					step={1}
+					onChange={(e) => dispatch(setDateFilter(e.currentTarget.value))}
+					ref={ref}
+					type="month"
+					name="monthFilter"
+					id="monthFilter"
+					max={currentDate}
+					readOnly
+				/>
 
-			<button onClick={() => handleChange("up")}>
-				<MdOutlineArrowForwardIos size="20px" />
+				<button
+					onClick={() => handleChange("up")}
+					className="transition-all disabled:text-gray-300"
+					disabled={dateFilter === currentDate}>
+					<MdOutlineArrowForwardIos size="20px" />
+				</button>
+			</div>
+
+			<button
+				className={styles.button}
+				onClick={() => dispatch(setDateFilter(currentDate))}
+				disabled={dateFilter === currentDate}>
+				Current month
 			</button>
 		</div>
 	);
