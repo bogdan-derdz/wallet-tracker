@@ -1,27 +1,8 @@
 import { FC } from "react";
 import { Chart } from "react-chartjs-2";
-import {
-	Chart as ChartJS,
-	ArcElement,
-	ChartData,
-	CategoryScale,
-	LinearScale,
-	PointElement,
-	LineElement,
-	Tooltip,
-	Filler,
-	ChartOptions,
-} from "chart.js";
+import { Chart as ChartJS, ChartData, ChartOptions, registerables } from "chart.js";
 
-ChartJS.register(
-	CategoryScale,
-	LinearScale,
-	PointElement,
-	LineElement,
-	Tooltip,
-	Filler,
-	ArcElement
-);
+ChartJS.register(...registerables);
 
 interface WidgetChartProps {
 	title: string;
