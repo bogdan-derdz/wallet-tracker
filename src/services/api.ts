@@ -1,9 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Record } from "../types/record";
 
+//! --- You always can change url to ---
+//! ------ http://localhost:3001 -------
+//! ---- For using local json server ---
+const baseUrl = "https://json-server-vercel-virid.vercel.app/api/";
+
 export const api = createApi({
 	reducerPath: "recordsApi",
-	baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001" }),
+	baseQuery: fetchBaseQuery({ baseUrl }),
 	tagTypes: ["Records"],
 	endpoints: (build) => ({
 		getAllRecords: build.query<Record[], void>({
