@@ -11,7 +11,7 @@
 }
 
 .list {
-	@apply flex flex-col bg-white px-1 border-[1px] rounded-md border-gray-300 absolute w-full top-[110%] left-0 z-50 overflow-y-scroll max-h-[210px] drop-shadow-[0_2px_3px_rgb(0,0,0,0.6)];
+	@apply flex flex-col bg-white px-1 border-[1px] rounded-md border-gray-300 absolute w-full top-[110%] left-0 z-50 max-h-[210px] drop-shadow-[0_2px_3px_rgb(0,0,0,0.6)] overflow-y-scroll;
 }
 
 .icon {
@@ -26,7 +26,7 @@
 	&:first-of-type {
 		@apply border-none;
 	}
-	@apply flex items-center gap-3 cursor-pointer border-t-[1px] border-gray-300 py-[6px];
+	@apply flex items-center gap-3 border-t-[1px] border-gray-300 py-[6px] cursor-pointer;
 }
 
 .label {

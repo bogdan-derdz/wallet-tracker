@@ -14,7 +14,7 @@
 }
 
 .amount-input {
-	@apply pl-2 pr-12 text-right w-[200px];
+	@apply pl-2 pr-12 w-[200px] text-right;
 }
 
 .date-input {
@@ -24,7 +24,7 @@
 .currency {
 	@apply absolute right-[4px] bottom-[5px] font-medium select-none;
 	&::before {
-		@apply h-[34px] w-[1px] bg-gray-300 absolute left-[-4px] top-[50%] translate-y-[-50%];
+		@apply h-[34px] w-[1px] absolute left-[-4px] top-[50%] translate-y-[-50%] bg-gray-300;
 		content: "";
 	}
 }

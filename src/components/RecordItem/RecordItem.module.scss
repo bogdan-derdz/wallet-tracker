@@ -14,7 +14,7 @@
 	@apply w-7 h-7 rounded-full flex justify-center items-center;
 
 	& svg {
-		@apply text-white text-[18px];
+		@apply text-[18px] text-white;
 	}
 }
 
