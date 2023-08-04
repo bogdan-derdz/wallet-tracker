@@ -4,6 +4,8 @@
 > **While creating this project i learned and trained typescript in react & redux,
 > <br>
 > I was using tailwind and learned new technologies 🎓**
+
+
 [✅Deployed Project](wallet-tracker-bagtirr.vercel.app/)
 
 ## ⚙ Technologies
