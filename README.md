@@ -1,3 +1,5 @@
+<img src="./preview.png" width="50%" align="center" alt="preview"/>
+
 # Wallet Tracker
 **Web App for managing your finances📈**
 <br>
@@ -6,7 +8,7 @@
 > I was using tailwind and learned new technologies 🎓**
 
 
-[✅Deployed Project](wallet-tracker-bagtirr.vercel.app/)
+[✅Deployed Project](https://wallet-tracker-bagtirr.vercel.app)
 
 ## ⚙ Technologies
 - Typescript
