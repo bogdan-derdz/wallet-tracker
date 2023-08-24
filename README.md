@@ -1,4 +1,4 @@
-<img src="./preview.png" width="50%" align="center" alt="preview"/>
+<div align="center"><img src="./preview.png" width="60%" alt="preview"/></div>
 
 # Wallet Tracker
 **Web App for managing your finances📈**
@@ -13,7 +13,7 @@
 ## ⚙ Technologies
 - Typescript
 - React
-- RTK Toolkit & RTK Query
+- Redux Toolkit & RTK Query
 - Tailwind
 - Chart JS
 - Framer Motion
