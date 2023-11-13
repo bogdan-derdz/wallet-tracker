@@ -36,7 +36,7 @@
 
 ```bash
 # Clone repository:
-git clone https://github.com/bagtirr/CoffeeHouse.git
+git clone https://github.com/bagtirr/wallet-tracker.git
 
 # Install all dependencies
 npm i
